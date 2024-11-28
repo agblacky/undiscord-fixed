@@ -23,7 +23,8 @@
    * Edge: [Tampermonkey][edge_tampermonkey]  
    * Safari: ~[Tampermonkey][safari_tampermonkey]~ 
     
-1. Install Undiscord:  
+1. Install Undiscord:
+   Download undiscord.js and add it to Tampermonkey
   [![][greasyfork_icon]][greasyfork_url] or [![][openuserjs_icon]][openuserjs_url]  
   (NOTE: GreasyFork is recommended for now, OpenUserJS is not receiving updates)
 
