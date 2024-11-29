@@ -19,7 +19,7 @@
   'use strict';
 
   /* rollup-plugin-baked-env */
-  const VERSION = '5.2.3';
+  const VERSION = '5.2.5';
 
   var themeCss = `
 /* undiscord window */
@@ -112,7 +112,7 @@
 #undiscord .tbar { padding: 8px; background-color: var(--background-secondary-alt); }
 #undiscord .tbar button { margin-right: 4px; margin-bottom: 4px; }
 #undiscord .footer { cursor: se-resize; padding-right: 30px; }
-#undiscord .footer #progressPercent { padding: 0 1em; font-size: small; color: var(--interactive-muted); flex-grow: 1; }
+#undiscord .footer #progressPercent { padding: 0 1em; font-size: small; color: var(--header-secondary); flex-grow: 1; }
 .resize-handle { position: absolute; bottom: -15px; right: -15px; width: 30px; height: 30px; transform: rotate(-45deg); background: repeating-linear-gradient(0, var(--background-modifier-accent), var(--background-modifier-accent) 1px, transparent 2px, transparent 4px); cursor: nwse-resize; }
 /**** Elements ****/
 #undiscord summary { font-size: 16px; font-weight: 500; line-height: 20px; position: relative; overflow: hidden; margin-bottom: 2px; padding: 6px 10px; cursor: pointer; white-space: nowrap; text-overflow: ellipsis; color: var(--interactive-normal); border-radius: 4px; flex-shrink: 0; }
@@ -328,7 +328,7 @@
                         <a href="{{WIKI}}/delay" title="Help" target="_blank" rel="noopener noreferrer">help</a>
                     </legend>
                     <div class="input-wrapper">
-                        <input id="searchDelay" type="range" value="30000" step="100" min="100" max="60000">
+                        <input id="searchDelay" type="range" value="3000" step="100" min="100" max="7000">
                         <div id="searchDelayValue"></div>
                     </div>
                 </fieldset>
@@ -338,7 +338,7 @@
                         <a href="{{WIKI}}/delay" title="Help" target="_blank" rel="noopener noreferrer">help</a>
                     </legend>
                     <div class="input-wrapper">
-                        <input id="deleteDelay" type="range" value="1000" step="50" min="50" max="10000">
+                        <input id="deleteDelay" type="range" value="650" step="50" min="300" max="1200">
                         <div id="deleteDelayValue"></div>
                     </div>
                     <br>
@@ -778,7 +778,7 @@
 
           this.stats.throttledCount++;
           this.stats.throttledTotalTime += w;
-          this.stats.searchDelay += w; // increase delay
+          this.stats.searchDelay += 50; // increase delay
           w = this.stats.searchDelay;
           log.warn(
             `Being rate limited by the API for ${w}ms! Increasing search delay...`,
