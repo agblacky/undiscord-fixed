@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name            Undiscord
 // @description     Delete all messages in a Discord channel or DM (Bulk deletion)
-// @version         5.2.4
+// @version         5.2.5
 // @author          victornpb - corrected by agblacky
 // @homepageURL     https://github.com/victornpb/undiscord
 // @supportURL      https://github.com/victornpb/undiscord/discussions
@@ -613,7 +613,7 @@
           this.calcEtr();
           log.verb(`Estimated time remaining: ${msToHMS(this.stats.etr)}`);
           log.verb('Resetting skippedPages counter');
-          this.skippedPages;
+          this.skippedPages = 0;
           await this.deleteMessagesFromList();
         } else if (this.state._skippedMessages.length > 0) {
           // There are stuff, but nothing to delete (example a page full of system messages)
