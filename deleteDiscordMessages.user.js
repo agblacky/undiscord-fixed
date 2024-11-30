@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name            Undiscord
 // @description     Delete all messages in a Discord channel or DM (Bulk deletion)
-// @version         5.2.5
+// @version         5.2.6
 // @author          victornpb - corrected by agblacky
 // @homepageURL     https://github.com/victornpb/undiscord
 // @supportURL      https://github.com/victornpb/undiscord/discussions
@@ -19,7 +19,7 @@
   'use strict';
 
   /* rollup-plugin-baked-env */
-  const VERSION = '5.2.5';
+  const VERSION = '5.2.6';
 
   var themeCss = `
 /* undiscord window */
@@ -598,7 +598,10 @@
 
         // Process results and find which messages should be deleted
         await this.filterResponse();
-
+        if (this.state._seachResponse.messages.length == 0) {
+          await wait(500);
+          continue;
+        }
         log.verb(
           `Grand total: ${this.state.grandTotal}`,
           `(Messages in current page: ${this.state._seachResponse.messages.length}`,
@@ -782,7 +785,7 @@
           w = this.stats.searchDelay;
           log.warn(
             `Being rate limited by the API for ${w}ms! Increasing search delay...`,
-          );
+          ); 
           this.printStats();
           log.verb(`Cooling down for ${w * 2}ms before retrying...`);
 
