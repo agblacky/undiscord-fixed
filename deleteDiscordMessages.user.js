@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name            Undiscord
 // @description     Delete all messages in a Discord channel or DM (Bulk deletion)
-// @version         5.2.6
+// @version         5.2.7
 // @author          victornpb - corrected by agblacky
 // @homepageURL     https://github.com/victornpb/undiscord
 // @supportURL      https://github.com/victornpb/undiscord/discussions
@@ -19,7 +19,7 @@
   'use strict';
 
   /* rollup-plugin-baked-env */
-  const VERSION = '5.2.6';
+  const VERSION = '5.2.7';
 
   var themeCss = `
 /* undiscord window */
@@ -338,7 +338,7 @@
                         <a href="{{WIKI}}/delay" title="Help" target="_blank" rel="noopener noreferrer">help</a>
                     </legend>
                     <div class="input-wrapper">
-                        <input id="deleteDelay" type="range" value="650" step="50" min="300" max="1200">
+                        <input id="deleteDelay" type="range" value="600" step="50" min="300" max="1200">
                         <div id="deleteDelayValue"></div>
                     </div>
                     <br>
@@ -598,10 +598,6 @@
 
         // Process results and find which messages should be deleted
         await this.filterResponse();
-        if (this.state._seachResponse.messages.length == 0) {
-          await wait(500);
-          continue;
-        }
         log.verb(
           `Grand total: ${this.state.grandTotal}`,
           `(Messages in current page: ${this.state._seachResponse.messages.length}`,
@@ -777,15 +773,14 @@
         // searching messages too fast
         if (resp.status === 429) {
           let w = (await resp.json()).retry_after * 1000;
-          w = w || this.stats.searchDelay; // Fix retry_after 0
+          w = w || this.options.searchDelay; // Fix retry_after 0
 
           this.stats.throttledCount++;
           this.stats.throttledTotalTime += w;
-          this.stats.searchDelay += 50; // increase delay
-          w = this.stats.searchDelay;
+          this.options.searchDelay += 50; // increase delay
           log.warn(
             `Being rate limited by the API for ${w}ms! Increasing search delay...`,
-          ); 
+          );
           this.printStats();
           log.verb(`Cooling down for ${w * 2}ms before retrying...`);
 
